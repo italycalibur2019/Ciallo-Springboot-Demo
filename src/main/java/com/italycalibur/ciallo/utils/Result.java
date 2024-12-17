@@ -5,7 +5,7 @@ import com.italycalibur.ciallo.enums.ResponseEnum;
 /**
  * @author dhr
  * @version 1.0
- * @description: TODO
+ * @description: 统一返回接口
  * @date 2024-12-14 上午8:27:32
  */
 public record Result<T>(boolean success, String code, String message, T data) {

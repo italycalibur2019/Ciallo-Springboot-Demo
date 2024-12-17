@@ -1,5 +1,6 @@
 package com.italycalibur.ciallo.service.impl;
 
+import cn.hutool.crypto.digest.DigestUtil;
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.repository.UserDao;
@@ -22,7 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoVO login(String username, String password) {
-        User user = userDao.findUserByUsernameAndPassword(username, password);
+        String decodedPwd = DigestUtil.md5Hex(password);
+        User user = userDao.findUserByUsernameAndPassword(username, decodedPwd);
         if (user != null) {
             UserInfoVO userInfoVO = new UserInfoVO();
             userInfoVO.setUsername(user.getUsername());
@@ -38,6 +40,8 @@ public class UserServiceImpl implements UserService {
         User existed = userDao.findUserByUsername(params.getUsername());
         if (existed == null) {
             User user = new User();
+            String decodedPwd = DigestUtil.md5Hex(params.getPassword());
+            params.setPassword(decodedPwd);
             BeanUtils.copyProperties(params, user);
             return userDao.save(user);
         }

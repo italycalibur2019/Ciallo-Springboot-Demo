@@ -9,6 +9,7 @@ import com.italycalibur.ciallo.vo.UserInfoVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  */
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Resource
     private UserService userService;

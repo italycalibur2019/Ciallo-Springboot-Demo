@@ -10,7 +10,7 @@ import com.italycalibur.ciallo.vo.UserInfo;
  * @description: TODO
  * @date 2024-12-13 下午5:52:07
  */
-public interface UserService {
+public interface LoginService {
     UserInfo login(String username, String password);
 
     User register(RegisterDTO params);

@@ -4,7 +4,7 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.repository.UserDao;
-import com.italycalibur.ciallo.service.UserService;
+import com.italycalibur.ciallo.service.LoginService;
 import com.italycalibur.ciallo.vo.UserInfo;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class LoginServiceImpl implements LoginService {
     @Resource
     private UserDao userDao;
 

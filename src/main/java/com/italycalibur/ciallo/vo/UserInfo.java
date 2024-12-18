@@ -12,7 +12,7 @@ import java.util.List;
  * @version 1.0
  */
 @Data
-public class UserInfoVO {
+public class UserInfo {
     private String avatar;
 
     private String username;

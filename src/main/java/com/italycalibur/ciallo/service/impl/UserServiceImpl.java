@@ -5,7 +5,7 @@ import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.repository.UserDao;
 import com.italycalibur.ciallo.service.UserService;
-import com.italycalibur.ciallo.vo.UserInfoVO;
+import com.italycalibur.ciallo.vo.UserInfo;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -22,15 +22,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public UserInfoVO login(String username, String password) {
+    public UserInfo login(String username, String password) {
         String decodedPwd = DigestUtil.md5Hex(password);
         User user = userDao.findUserByUsernameAndPassword(username, decodedPwd);
         if (user != null) {
-            UserInfoVO userInfoVO = new UserInfoVO();
-            userInfoVO.setUsername(user.getUsername());
-            userInfoVO.setNickname(user.getNickname());
-            userInfoVO.setAvatar(user.getAvatar());
-            return userInfoVO;
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUsername(user.getUsername());
+            userInfo.setNickname(user.getNickname());
+            userInfo.setAvatar(user.getAvatar());
+            return userInfo;
         }
         return null;
     }

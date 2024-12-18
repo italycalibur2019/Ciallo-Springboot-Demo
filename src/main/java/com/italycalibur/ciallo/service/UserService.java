@@ -2,7 +2,7 @@ package com.italycalibur.ciallo.service;
 
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.RegisterDTO;
-import com.italycalibur.ciallo.vo.UserInfoVO;
+import com.italycalibur.ciallo.vo.UserInfo;
 
 /**
  * @author dhr
@@ -11,7 +11,7 @@ import com.italycalibur.ciallo.vo.UserInfoVO;
  * @date 2024-12-13 下午5:52:07
  */
 public interface UserService {
-    UserInfoVO login(String username, String password);
+    UserInfo login(String username, String password);
 
     User register(RegisterDTO params);
 }

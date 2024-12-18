@@ -5,7 +5,7 @@ import com.italycalibur.ciallo.dto.LoginDTO;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.service.UserService;
 import com.italycalibur.ciallo.utils.Result;
-import com.italycalibur.ciallo.vo.UserInfoVO;
+import com.italycalibur.ciallo.vo.UserInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +25,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Result<UserInfoVO> login(@RequestBody LoginDTO params) {
-        UserInfoVO userInfoVO = userService.login(params.getUsername(), params.getPassword());
-        if (userInfoVO != null) {
-            return Result.ok("登录成功！", userInfoVO);
+    public Result<UserInfo> login(@RequestBody LoginDTO params) {
+        UserInfo userInfo = userService.login(params.getUsername(), params.getPassword());
+        if (userInfo != null) {
+            return Result.ok("登录成功！", userInfo);
         }else {
             return Result.fail("500", "用户名或密码错误！");
         }

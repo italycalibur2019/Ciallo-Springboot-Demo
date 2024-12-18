@@ -2,15 +2,17 @@ package com.italycalibur.ciallo.controller;
 
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.LoginDTO;
+import com.italycalibur.ciallo.dto.RefreshDTO;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.service.LoginService;
 import com.italycalibur.ciallo.utils.Result;
+import com.italycalibur.ciallo.vo.RefreshVO;
+import com.italycalibur.ciallo.vo.RouterVO;
 import com.italycalibur.ciallo.vo.UserInfo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @description: 登录注册管理
@@ -50,6 +52,26 @@ public class LoginController {
             return Result.ok("注册成功！");
         }else {
             return Result.fail("500", "注册失败！");
+        }
+    }
+
+    @PostMapping("/refresh-token")
+    public Result<RefreshVO> refreshToken(@RequestBody RefreshDTO params) {
+        RefreshVO vo = loginService.refreshToken(params);
+        if (vo != null) {
+            return Result.ok("刷新成功！", vo);
+        }else {
+            return Result.fail("500", "刷新失败！");
+        }
+    }
+
+    @GetMapping("/get-async-routes")
+    public Result<Object> getAsyncRoutes() {
+        List<RouterVO> list = loginService.getAsyncRoutes();
+        if (list != null) {
+            return Result.ok("获取路由成功！", list);
+        }else {
+            return Result.fail("500", "获取路由失败！");
         }
     }
 }

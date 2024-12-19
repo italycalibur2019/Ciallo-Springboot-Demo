@@ -1,5 +1,7 @@
 package com.italycalibur.ciallo.controller;
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.TypeReference;
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.LoginDTO;
 import com.italycalibur.ciallo.dto.RefreshDTO;
@@ -13,6 +15,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description: 登录注册管理
@@ -69,7 +72,9 @@ public class LoginController {
     public Result<Object> getAsyncRoutes() {
         List<RouterVO> list = loginService.getAsyncRoutes();
         if (list != null) {
-            return Result.ok("获取路由成功！", list);
+            String jsonStr = JSON.toJSONString(list);
+            List<Map<String, Object>> maps = JSON.parseObject(jsonStr, new TypeReference<>() {});
+            return Result.ok("获取路由成功！", maps);
         }else {
             return Result.fail("500", "获取路由失败！");
         }

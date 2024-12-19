@@ -90,6 +90,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public List<RouterVO> getAsyncRoutes() {
+        //写入假数据
         List<RouterVO> list = new ArrayList<>();
         RouterVO router = new RouterVO();
         router.setPath("/permission");
@@ -97,6 +98,8 @@ public class LoginServiceImpl implements LoginService {
         meta.setTitle("权限管理");
         meta.setIcon("ep:lollipop");
         meta.setRank(10);
+        meta.setShowLink(Boolean.TRUE);
+        meta.setShowParent(Boolean.TRUE);
         router.setMeta(meta);
         generateChildren(router);
         list.add(router);
@@ -119,7 +122,7 @@ public class LoginServiceImpl implements LoginService {
         childB.setPath("/permission/button");
         Meta metaB = new Meta();
         metaB.setTitle("按钮权限");
-        metaA.setRoles(new String[]{"admin", "common"});
+        metaB.setRoles(new String[]{"admin", "common"});
         childB.setMeta(metaB);
 
         List<RouterVO> childrenB = new ArrayList<>();

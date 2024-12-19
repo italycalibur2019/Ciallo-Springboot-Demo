@@ -31,7 +31,7 @@ public class LoginController {
     /**
      * 登录
      * @param params 登录参数
-     * @return 用户信息
+     * @return Result<UserInfo> 用户信息
      */
     @PostMapping("/login")
     public Result<UserInfo> login(@RequestBody LoginDTO params) {
@@ -46,10 +46,10 @@ public class LoginController {
     /**
      * 注册
      * @param params 注册参数
-     * @return Result<Object>
+     * @return Result<String>
      */
     @PostMapping("/register")
-    public Result<Object> register(@RequestBody RegisterDTO params) {
+    public Result<String> register(@RequestBody RegisterDTO params) {
         User register = loginService.register(params);
         if (register != null) {
             return Result.ok("注册成功！");
@@ -58,6 +58,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * 刷新令牌
+     * @param params 刷新参数
+     * @return Result<RefreshVO>
+     */
     @PostMapping("/refresh-token")
     public Result<RefreshVO> refreshToken(@RequestBody RefreshDTO params) {
         RefreshVO vo = loginService.refreshToken(params);
@@ -68,6 +73,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * 模拟获取动态路由
+     * @return Result<Object>
+     */
     @GetMapping("/get-async-routes")
     public Result<Object> getAsyncRoutes() {
         List<RouterVO> list = loginService.getAsyncRoutes();

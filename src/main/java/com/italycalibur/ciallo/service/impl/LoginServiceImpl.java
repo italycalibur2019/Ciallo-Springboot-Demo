@@ -3,14 +3,18 @@ package com.italycalibur.ciallo.service.impl;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.italycalibur.ciallo.domain.Menu;
+import com.italycalibur.ciallo.domain.Role;
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.RefreshDTO;
 import com.italycalibur.ciallo.dto.RegisterDTO;
+import com.italycalibur.ciallo.repository.MenuDao;
+import com.italycalibur.ciallo.repository.RoleDao;
 import com.italycalibur.ciallo.repository.UserDao;
 import com.italycalibur.ciallo.service.LoginService;
-import com.italycalibur.ciallo.vo.Meta;
+import com.italycalibur.ciallo.vo.permission.Meta;
 import com.italycalibur.ciallo.vo.RefreshVO;
-import com.italycalibur.ciallo.vo.RouterVO;
+import com.italycalibur.ciallo.vo.permission.RouterVO;
 import com.italycalibur.ciallo.vo.UserInfo;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +36,10 @@ import java.util.List;
 public class LoginServiceImpl implements LoginService {
     @Resource
     private UserDao userDao;
+    @Resource
+    private RoleDao roleDao;
+    @Resource
+    private MenuDao menuDao;
 
     @Override
     public UserInfo login(String username, String password) {
@@ -46,15 +54,16 @@ public class LoginServiceImpl implements LoginService {
 
             SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
             userInfo.setAccessToken(tokenInfo.getTokenValue());
-//            userInfo.setRefreshToken("eyJhbGciOiJIUzUxMiJ9.adminRefresh");
             Date now = new Date();
             long nowMs = now.getTime();
             nowMs += tokenInfo.getTokenTimeout() * 1000;
             Date expireTime = new Date(nowMs);
             userInfo.setExpires(expireTime);
-            //写入假参数
-            userInfo.setRoles(List.of("admin"));
-            userInfo.setPermissions(List.of("*:*:*"));
+
+            List<String> roles = roleDao.findRolesByUserId(user.getId()).stream().map(Role::getCode).toList();
+            if (!roles.isEmpty()) {
+                userInfo.setRoles(roles);
+            }
             return userInfo;
         }
         return null;
@@ -94,23 +103,52 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public List<RouterVO> getAsyncRoutes() {
+        List<RouterVO> list = generateFakePermission(new ArrayList<>());
+        Object loginId = StpUtil.getLoginId();
+        Long userId = Long.parseLong(loginId.toString());
+        User user = userDao.findById(userId).orElse(null);
+        if (user == null) {
+            return list;
+        }
+        List<Long> roleIds = roleDao.findRolesByUserId(user.getId()).stream().map(Role::getId).toList();
+        for (Long roleId : roleIds) {
+            List<Menu> menus = menuDao.findTopMenusByRole(roleId);
+            for (Menu menu : menus) {
+                list.add(generateRouter(menu));
+            }
+        }
+        return list;
+    }
+
+    private RouterVO generateRouter(Menu menu) {
+        RouterVO router = new RouterVO();
+        router.setPath(menu.getPath());
+        router.setName(menu.getName());
+        Meta meta = new Meta();
+        meta.setTitle(menu.getTitle());
+        meta.setIcon(menu.getIcon());
+        router.setMeta(meta);
+        List<Menu> childMenus = menuDao.findChildren(menu.getId());
+        if (childMenus != null && !childMenus.isEmpty()) {
+            List<RouterVO> children = new ArrayList<>();
+            for (Menu childMenu : childMenus) {
+                children.add(generateRouter(childMenu));
+            }
+            router.setChildren(children);
+        }
+        return router;
+    }
+
+    private List<RouterVO> generateFakePermission(List<RouterVO> list) {
         //写入假数据
-        List<RouterVO> list = new ArrayList<>();
         RouterVO router = new RouterVO();
         router.setPath("/permission");
         Meta meta = new Meta();
         meta.setTitle("权限管理");
         meta.setIcon("ep:lollipop");
         meta.setRank(10);
-        meta.setShowLink(Boolean.TRUE);
-        meta.setShowParent(Boolean.TRUE);
         router.setMeta(meta);
-        generateChildren(router);
-        list.add(router);
-        return list;
-    }
 
-    private void generateChildren(RouterVO router) {
         List<RouterVO> children = new ArrayList<>();
 
         RouterVO childA = new RouterVO();
@@ -155,5 +193,9 @@ public class LoginServiceImpl implements LoginService {
         children.add(childB);
 
         router.setChildren(children);
+
+        list.add(router);
+
+        return list;
     }
 }

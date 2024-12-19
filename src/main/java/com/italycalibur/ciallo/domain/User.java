@@ -4,12 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * @description: 用户表实体
- * @author dhr
- * @date 2024-12-17 14:52:39
- * @version 1.0
- */
 @Getter
 @Setter
 @Entity

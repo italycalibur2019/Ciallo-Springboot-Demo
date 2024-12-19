@@ -1,4 +1,4 @@
-package com.italycalibur.ciallo.vo;
+package com.italycalibur.ciallo.vo.permission;
 
 import lombok.Data;
 

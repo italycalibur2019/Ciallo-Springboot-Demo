@@ -1,5 +1,7 @@
 package com.italycalibur.ciallo.service.impl;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.italycalibur.ciallo.domain.User;
 import com.italycalibur.ciallo.dto.RefreshDTO;
@@ -36,22 +38,23 @@ public class LoginServiceImpl implements LoginService {
         String decodedPwd = DigestUtil.md5Hex(password);
         User user = userDao.findUserByUsernameAndPassword(username, decodedPwd);
         if (user != null) {
+            StpUtil.login(user.getId());
             UserInfo userInfo = new UserInfo();
             userInfo.setUsername(user.getUsername());
             userInfo.setNickname(user.getNickname());
             userInfo.setAvatar(user.getAvatar());
+
+            SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+            userInfo.setAccessToken(tokenInfo.getTokenValue());
+//            userInfo.setRefreshToken("eyJhbGciOiJIUzUxMiJ9.adminRefresh");
+            Date now = new Date();
+            long nowMs = now.getTime();
+            nowMs += tokenInfo.getTokenTimeout() * 1000;
+            Date expireTime = new Date(nowMs);
+            userInfo.setExpires(expireTime);
             //写入假参数
             userInfo.setRoles(List.of("admin"));
             userInfo.setPermissions(List.of("*:*:*"));
-            userInfo.setAccessToken("eyJhbGciOiJIUzUxMiJ9.admin");
-            userInfo.setRefreshToken("eyJhbGciOiJIUzUxMiJ9.adminRefresh");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            try {
-                Date parse = format.parse("2030/10/30 00:00:00");
-                userInfo.setExpires(parse);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
             return userInfo;
         }
         return null;

@@ -1,5 +1,6 @@
 package com.italycalibur.ciallo.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
 import com.italycalibur.ciallo.domain.User;
@@ -87,5 +88,15 @@ public class LoginController {
         }else {
             return Result.fail("500", "获取路由失败！");
         }
+    }
+
+    /**
+     * 登出
+     * @return Result<String>
+     */
+    @PostMapping("/logout")
+    public Result<String> logout() {
+        StpUtil.logout();
+        return Result.ok("退出成功！");
     }
 }

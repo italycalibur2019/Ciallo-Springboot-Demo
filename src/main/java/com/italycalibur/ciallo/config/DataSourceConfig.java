@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 /**
- * @description: TODO 
+ * @description: 多数据源配置
  * @author dhr
  * @date 2024-12-24 下午2:14:35
  * @version 1.0

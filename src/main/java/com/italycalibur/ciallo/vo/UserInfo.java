@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @description: TODO 
+ * @description: 用户信息
  * @author dhr
  * @date 2024-12-14 上午8:22:27
  * @version 1.0

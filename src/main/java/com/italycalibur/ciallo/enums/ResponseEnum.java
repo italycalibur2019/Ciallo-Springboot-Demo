@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * @author dhr
  * @version 1.0
- * @description: TODO
+ * @description: 返回状态码
  * @date 2024-12-14 上午8:31:29
  */
 @AllArgsConstructor

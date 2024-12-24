@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @description: TODO 
+ * @description: Sa-Token权限配置
  * @author dhr
  * @date 2024-12-19 下午1:50:43
  * @version 1.0

@@ -7,12 +7,6 @@ import com.italycalibur.ciallo.utils.Result;
 import com.italycalibur.ciallo.vo.DriverVO;
 import org.springframework.data.domain.Pageable;
 
-/**
- * @author dhr
- * @version 1.0
- * @description: TODO
- * @date 2024-12-24 下午3:27:33
- */
 public interface DriverService {
     PageData<DriverVO> listDriver(DriverSearchDTO params, Pageable pageable);
 

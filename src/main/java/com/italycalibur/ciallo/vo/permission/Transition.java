@@ -6,7 +6,7 @@ import lombok.Data;
  * @author dhr
  * @version 1.0
  * @date 2024-12-18 22:36:26
- * @description: TODO
+ * @description: 前端动画配置
  */
 @Data
 public class Transition {

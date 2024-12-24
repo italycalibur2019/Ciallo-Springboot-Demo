@@ -6,7 +6,7 @@ import lombok.Data;
  * @author dhr
  * @version 1.0
  * @date 2024-12-18 22:24:11
- * @description: TODO
+ * @description: 前端路由元信息
  */
 @Data
 public class Meta {

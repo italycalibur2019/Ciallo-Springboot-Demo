@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @author dhr
  * @version 1.0
- * @description: TODO
+ * @description: 分页返回参数
  * @date 2024-12-24 下午1:41:05
  */
 public record PageData<T>(Integer page, Long total, List<T> rows, Integer totalPage, Map<String, Object> extraData) {

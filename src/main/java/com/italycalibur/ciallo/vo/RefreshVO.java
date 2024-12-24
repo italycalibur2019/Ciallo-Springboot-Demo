@@ -8,7 +8,7 @@ import java.util.Date;
  * @author dhr
  * @version 1.0
  * @date 2024-12-18 21:46:00
- * @description: TODO
+ * @description: 刷新令牌返回结果
  */
 @Data
 public class RefreshVO {

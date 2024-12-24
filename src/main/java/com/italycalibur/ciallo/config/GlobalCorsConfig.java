@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author dhr
  * @version 1.0
  * @date 2024-12-18 22:51:51
- * @description: 全局跨域
+ * @description: 全局跨域配置
  */
 @Configuration
 public class GlobalCorsConfig implements WebMvcConfigurer {

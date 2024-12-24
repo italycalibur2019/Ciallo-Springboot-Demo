@@ -9,12 +9,6 @@ import com.italycalibur.ciallo.vo.UserInfo;
 
 import java.util.List;
 
-/**
- * @author dhr
- * @version 1.0
- * @description: TODO
- * @date 2024-12-13 下午5:52:07
- */
 public interface LoginService {
     UserInfo login(String username, String password);
 

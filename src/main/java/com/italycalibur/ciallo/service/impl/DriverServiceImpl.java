@@ -21,12 +21,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @description: TODO 
- * @author dhr
- * @date 2024-12-24 下午3:30:11
- * @version 1.0
- */
 @Service
 public class DriverServiceImpl implements DriverService {
     @Resource
@@ -57,6 +51,11 @@ public class DriverServiceImpl implements DriverService {
         for (Driver driver : content) {
             DriverVO row = new DriverVO();
             BeanUtils.copyProperties(driver, row);
+            if ("China".equalsIgnoreCase(driver.getCountry())) {
+                row.setFullName(driver.getLastName() + " " + driver.getFirstName());
+            }else {
+                row.setFullName(driver.getFirstName() + " " + driver.getLastName());
+            }
             rows.add(row);
         }
         return PageData.of(page.getNumber(), page.getTotalElements(), rows, page.getTotalPages());

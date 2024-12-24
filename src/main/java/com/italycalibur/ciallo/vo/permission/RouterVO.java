@@ -8,7 +8,7 @@ import java.util.List;
  * @author dhr
  * @version 1.0
  * @date 2024-12-18 21:56:33
- * @description: TODO
+ * @description: 前端菜单路由参数
  */
 @Data
 public class RouterVO {

@@ -26,12 +26,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @description: TODO 
- * @author dhr
- * @date 2024-12-13 下午5:52:24
- * @version 1.0
- */
 @Service
 public class LoginServiceImpl implements LoginService {
     @Resource
@@ -77,6 +71,7 @@ public class LoginServiceImpl implements LoginService {
             String decodedPwd = DigestUtil.md5Hex(params.getPassword());
             params.setPassword(decodedPwd);
             BeanUtils.copyProperties(params, user);
+            user.setAvatar("https://avatars.githubusercontent.com/u/53480306");// 默认头像
             return userDao.save(user);
         }
         return null;

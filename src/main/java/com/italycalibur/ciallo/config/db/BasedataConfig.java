@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @description: TODO 
+ * @description: postgres basedata模式具体配置
  * @author dhr
  * @date 2024-12-24 下午2:19:45
  * @version 1.0

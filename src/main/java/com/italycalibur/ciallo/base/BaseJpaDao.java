@@ -7,7 +7,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.io.Serializable;
 
 /**
- * @description: TODO 
+ * @description: 持久层集合
  * @author dhr
  * @date 2024-12-24 上午9:07:44
  * @version 1.0

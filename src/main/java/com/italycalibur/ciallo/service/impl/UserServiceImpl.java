@@ -8,12 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @description: TODO 
- * @author dhr
- * @date 2024-12-19 上午10:02:07
- * @version 1.0
- */
 @Service
 public class UserServiceImpl implements UserService {
     @Resource

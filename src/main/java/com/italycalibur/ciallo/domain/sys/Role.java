@@ -1,13 +1,16 @@
-package com.italycalibur.ciallo.domain;
+package com.italycalibur.ciallo.domain.sys;
 
+import com.italycalibur.ciallo.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @Entity
-@Table(name = "td_role", schema = "public")
+@Table(name = "td_role", schema = "sys")
 public class Role extends BaseEntity {
 
     /**

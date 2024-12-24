@@ -1,0 +1,16 @@
+app:
+  datasource:
+    sys:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/postgres?currentSchema=sys
+      username: postgres
+      password: 123456
+    basedata:
+      driver-class-name: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/postgres?currentSchema=basedata
+      username: postgres
+      password: 123456
+debug: true
+spring:
+  jpa:
+    show-sql: true

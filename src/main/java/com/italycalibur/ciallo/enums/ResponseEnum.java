@@ -13,7 +13,9 @@ import lombok.Getter;
 @Getter
 public enum ResponseEnum {
     SUCCESS("200", "操作成功"),
-    FAIL("500", "操作失败");
+    FAIL("500", "操作失败"),
+    UNAUTHORIZED("401", "未授权"),
+    FORBIDDEN("403", "禁止访问");
 
     private final String code;
 

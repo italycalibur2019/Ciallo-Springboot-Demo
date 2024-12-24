@@ -24,4 +24,12 @@ public record Result<T>(boolean success, String code, String message, T data) {
     public static <T> Result<T> fail(ResponseEnum responseEnum) {
         return new Result<>(false, responseEnum.getCode(), responseEnum.getMsg(), null);
     }
+
+    public static <T> Result<T> unauthorized() {
+        return fail(ResponseEnum.UNAUTHORIZED);
+    }
+
+    public static <T> Result<T> forbidden() {
+        return fail(ResponseEnum.FORBIDDEN);
+    }
 }

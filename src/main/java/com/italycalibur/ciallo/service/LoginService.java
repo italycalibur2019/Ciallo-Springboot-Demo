@@ -1,6 +1,6 @@
 package com.italycalibur.ciallo.service;
 
-import com.italycalibur.ciallo.domain.User;
+import com.italycalibur.ciallo.domain.sys.User;
 import com.italycalibur.ciallo.dto.RefreshDTO;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.vo.RefreshVO;

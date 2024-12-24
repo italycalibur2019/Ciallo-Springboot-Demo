@@ -3,7 +3,7 @@ package com.italycalibur.ciallo.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
-import com.italycalibur.ciallo.domain.User;
+import com.italycalibur.ciallo.domain.sys.User;
 import com.italycalibur.ciallo.dto.LoginDTO;
 import com.italycalibur.ciallo.dto.RefreshDTO;
 import com.italycalibur.ciallo.dto.RegisterDTO;

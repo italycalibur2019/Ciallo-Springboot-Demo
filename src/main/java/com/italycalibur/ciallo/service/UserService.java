@@ -1,6 +1,6 @@
 package com.italycalibur.ciallo.service;
 
-import com.italycalibur.ciallo.domain.User;
+import com.italycalibur.ciallo.domain.sys.User;
 
 import java.util.List;
 

@@ -1,17 +1,19 @@
-package com.italycalibur.ciallo.domain;
+package com.italycalibur.ciallo.domain.sys;
 
+import com.italycalibur.ciallo.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
+@ToString
 @Entity
-@Table(name = "td_menu", schema = "public")
+@Table(name = "td_menu", schema = "sys")
 public class Menu extends BaseEntity {
 
     @Column(name = "path", length = 100)

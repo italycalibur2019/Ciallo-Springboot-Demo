@@ -1,4 +1,4 @@
-package com.italycalibur.ciallo.domain;
+package com.italycalibur.ciallo.base;
 
 import com.italycalibur.ciallo.utils.generator.SnowFlakeIdGenerator;
 import jakarta.persistence.*;

@@ -1,7 +1,7 @@
 package com.italycalibur.ciallo.service.impl;
 
-import com.italycalibur.ciallo.domain.User;
-import com.italycalibur.ciallo.repository.UserDao;
+import com.italycalibur.ciallo.domain.sys.User;
+import com.italycalibur.ciallo.repository.sys.UserDao;
 import com.italycalibur.ciallo.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

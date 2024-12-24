@@ -1,7 +1,7 @@
-package com.italycalibur.ciallo.repository;
+package com.italycalibur.ciallo.repository.sys;
 
-import com.italycalibur.ciallo.domain.Role;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.italycalibur.ciallo.base.BaseJpaDao;
+import com.italycalibur.ciallo.domain.sys.Role;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2024-12-19 下午3:11:08
  */
 @Repository
-public interface RoleDao extends JpaRepository<Role, Long> {
+public interface RoleDao extends BaseJpaDao<Role, Long> {
     @Query("select tr from Role tr left join UserRole tur on tur.roleId = tr.id where tur.userId = ?1")
     List<Role> findRolesByUserId(Long userId);
 }

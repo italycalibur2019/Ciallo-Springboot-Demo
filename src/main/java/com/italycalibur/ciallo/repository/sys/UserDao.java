@@ -1,7 +1,7 @@
-package com.italycalibur.ciallo.repository;
+package com.italycalibur.ciallo.repository.sys;
 
-import com.italycalibur.ciallo.domain.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.italycalibur.ciallo.base.BaseJpaDao;
+import com.italycalibur.ciallo.domain.sys.User;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  */
 @Repository
-public interface UserDao extends JpaRepository<User, Long> {
+public interface UserDao extends BaseJpaDao<User, Long> {
     User findUserByUsername(String username);
 
     User findUserByUsernameAndPassword(String username, String password);

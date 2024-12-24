@@ -1,6 +1,6 @@
 package com.italycalibur.ciallo.controller;
 
-import com.italycalibur.ciallo.domain.User;
+import com.italycalibur.ciallo.domain.sys.User;
 import com.italycalibur.ciallo.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,8 @@
-package com.italycalibur.ciallo.domain;
+package com.italycalibur.ciallo.domain.sys;
 
+import com.italycalibur.ciallo.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "td_permission", schema = "public")
+@Table(name = "td_permission", schema = "sys")
 public class Permission extends BaseEntity {
 
     @Column(name = "role_id")

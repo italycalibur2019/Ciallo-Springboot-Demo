@@ -1,4 +1,4 @@
-package com.italycalibur.ciallo.utils;
+package com.italycalibur.ciallo.utils.pojo;
 
 import org.springframework.data.domain.Page;
 

@@ -1,3 +1,4 @@
+### 多数据源配置,格式为app.datasource.[数据源名称] ###
 app:
   datasource:
     sys:
@@ -10,7 +11,3 @@ app:
       jdbc-url: jdbc:postgresql://localhost:5432/postgres?currentSchema=basedata
       username: postgres
       password: 123456
-debug: true
-spring:
-  jpa:
-    show-sql: true

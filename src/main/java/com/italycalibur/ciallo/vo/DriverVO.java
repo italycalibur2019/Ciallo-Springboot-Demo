@@ -17,4 +17,7 @@ public class DriverVO {
 
     private String country;
 
+    private String birthday;
+
+    private Integer age;
 }

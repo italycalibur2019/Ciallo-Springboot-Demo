@@ -8,7 +8,7 @@ import com.italycalibur.ciallo.dto.LoginDTO;
 import com.italycalibur.ciallo.dto.RefreshDTO;
 import com.italycalibur.ciallo.dto.RegisterDTO;
 import com.italycalibur.ciallo.service.LoginService;
-import com.italycalibur.ciallo.utils.Result;
+import com.italycalibur.ciallo.utils.pojo.Result;
 import com.italycalibur.ciallo.vo.RefreshVO;
 import com.italycalibur.ciallo.vo.permission.RouterVO;
 import com.italycalibur.ciallo.vo.UserInfo;

@@ -2,5 +2,10 @@ server:
   port: 8888
 spring:
   profiles:
-    include: sa-token,db
-
+    include: sa,db
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org.hibernate.orm.connections: off

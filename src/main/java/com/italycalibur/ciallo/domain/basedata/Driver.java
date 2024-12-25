@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -24,5 +26,8 @@ public class Driver extends BaseEntity {
 
     @Column(name = "country", length = 100)
     private String country;
+
+    @Column(name = "birthday")
+    private Date birthday;
 
 }

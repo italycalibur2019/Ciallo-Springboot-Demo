@@ -3,9 +3,9 @@ package com.italycalibur.ciallo.controller;
 import com.italycalibur.ciallo.domain.basedata.Driver;
 import com.italycalibur.ciallo.dto.DriverSearchDTO;
 import com.italycalibur.ciallo.service.DriverService;
-import com.italycalibur.ciallo.utils.PageData;
-import com.italycalibur.ciallo.utils.QueryRequest;
-import com.italycalibur.ciallo.utils.Result;
+import com.italycalibur.ciallo.utils.pojo.PageData;
+import com.italycalibur.ciallo.utils.pojo.QueryRequest;
+import com.italycalibur.ciallo.utils.pojo.Result;
 import com.italycalibur.ciallo.vo.DriverVO;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class DriverController {
 
     @GetMapping("/listDriver")
     public PageData<DriverVO> listDriver(@RequestBody QueryRequest<DriverSearchDTO> queryRequest) {
-        return driverService.listDriver(queryRequest.params(), queryRequest.pageable());
+        return driverService.listDriver(queryRequest.params(), queryRequest.pageable(), queryRequest.sort());
     }
 
     @PostMapping("/addDriver")

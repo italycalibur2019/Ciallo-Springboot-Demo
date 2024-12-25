@@ -4,17 +4,16 @@ import com.italycalibur.ciallo.domain.basedata.Driver;
 import com.italycalibur.ciallo.dto.DriverSearchDTO;
 import com.italycalibur.ciallo.repository.basedata.DriverDao;
 import com.italycalibur.ciallo.service.DriverService;
-import com.italycalibur.ciallo.utils.PageData;
-import com.italycalibur.ciallo.utils.Result;
+import com.italycalibur.ciallo.utils.DateUtils;
+import com.italycalibur.ciallo.utils.pojo.PageData;
+import com.italycalibur.ciallo.utils.pojo.Result;
 import com.italycalibur.ciallo.vo.DriverVO;
 import jakarta.annotation.Resource;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class DriverServiceImpl implements DriverService {
     private DriverDao driverDao;
 
     @Override
-    public PageData<DriverVO> listDriver(DriverSearchDTO params, Pageable pageable) {
+    public PageData<DriverVO> listDriver(DriverSearchDTO params, Pageable pageable, Sort sort) {
         Page<Driver> page = driverDao.findAll((Specification<Driver>) (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (params != null) {
@@ -56,6 +55,8 @@ public class DriverServiceImpl implements DriverService {
             }else {
                 row.setFullName(driver.getFirstName() + " " + driver.getLastName());
             }
+            row.setBirthday(DateUtils.formatDate(driver.getBirthday(), DateUtils.format(DateUtils.DateType.A)));
+            row.setAge(DateUtils.getYearsDifference(driver.getBirthday()));
             rows.add(row);
         }
         return PageData.of(page.getNumber(), page.getTotalElements(), rows, page.getTotalPages());

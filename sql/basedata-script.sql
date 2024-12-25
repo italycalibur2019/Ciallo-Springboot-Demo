@@ -46,3 +46,36 @@ INSERT INTO basedata.td_driver (id, first_name, last_name, code, country, birthd
 INSERT INTO basedata.td_driver (id, first_name, last_name, code, country, birthday) VALUES(10, 'Esteban', 'Ocon', 31, 'France', '1996-09-17');
 INSERT INTO basedata.td_driver (id, first_name, last_name, code, country, birthday) VALUES(19, 'Lewis', 'Hamilton', 44, 'Great Britain', '1985-01-07');
 INSERT INTO basedata.td_driver (id, first_name, last_name, code, country, birthday) VALUES(5, 'Carlos', 'Sainz', 55, 'Spain', '1994-09-01');
+
+-- basedata.td_team definition
+
+-- Drop table
+
+-- DROP TABLE basedata.td_team;
+
+CREATE TABLE basedata.td_team (
+                                  id int8 NOT NULL, -- 主键
+                                  team_name varchar(100) NULL, -- 车队名称
+                                  engine_supplier varchar(100) NULL, -- 引擎制造商
+                                  leader varchar(100) NULL, -- 车队领队
+                                  CONSTRAINT td_team_pk PRIMARY KEY (id)
+);
+COMMENT ON TABLE basedata.td_team IS '车队';
+
+-- Column comments
+
+COMMENT ON COLUMN basedata.td_team.id IS '主键';
+COMMENT ON COLUMN basedata.td_team.team_name IS '车队名称';
+COMMENT ON COLUMN basedata.td_team.engine_supplier IS '引擎制造商';
+COMMENT ON COLUMN basedata.td_team.leader IS '车队领队';
+
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(1, 'McLaren', 'Mercedes', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(2, 'Ferrari', 'Ferrari', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(4, 'Mercedes', 'Mercedes', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(5, 'Aston Martin', 'Mercedes', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(7, 'Haas', 'Ferrari', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(9, 'Williams', 'Mercedes', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(10, 'Sauber', 'Ferrari', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(3, 'Red Bull Racing', 'Honda', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(6, 'Alpine', 'Renault', '-');
+INSERT INTO basedata.td_team (id, team_name, engine_supplier, leader) VALUES(8, 'RB', 'Honda', '-');

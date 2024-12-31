@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,24 +29,28 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public PageData<DriverVO> listDriver(DriverSearchDTO params, Pageable pageable, Sort sort) {
-        Page<Driver> page = driverDao.findAll((Specification<Driver>) (root, query, criteriaBuilder) -> {
+        Specification<Driver> specification = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (params != null) {
-                if (params.getFirstName() != null) {
+                if (StringUtils.hasText(params.getFirstName())) {
                     predicates.add(criteriaBuilder.like(root.get("firstName"), "%" + params.getFirstName() + "%"));
                 }
-                if (params.getLastName() != null) {
+                if (StringUtils.hasText(params.getLastName())) {
                     predicates.add(criteriaBuilder.like(root.get("lastName"), "%" + params.getLastName() + "%"));
                 }
                 if (params.getCode() != null) {
                     predicates.add(criteriaBuilder.equal(root.get("code"), params.getCode()));
                 }
-                if (params.getCountry() != null) {
+                if (StringUtils.hasText(params.getCountry())) {
                     predicates.add(criteriaBuilder.like(root.get("country"), "%" + params.getCountry() + "%"));
                 }
             }
-            return query.where(predicates.toArray(new Predicate[0])).getRestriction();
-        }, pageable);
+            if (query != null) {
+                return query.where(predicates.toArray(new Predicate[0])).getRestriction();
+            }
+            return null;
+        };
+        Page<Driver> page = driverDao.findAll(specification, pageable);
         List<Driver> content = page.getContent();
         List<DriverVO> rows = new ArrayList<>();
         for (Driver driver : content) {
@@ -71,12 +77,12 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public Result<Object> updateDriver(Long id, Driver driver) {
         Driver existingDriver = driverDao.findById(id).orElse(null);
-        if (existingDriver != null) {
+        if (ObjectUtils.isEmpty(existingDriver)) {
+            return Result.fail("500", "更新失败！");
+        }else {
             BeanUtils.copyProperties(driver, existingDriver);
             driverDao.save(existingDriver);
             return Result.ok("更新成功！", null);
-        }else {
-            return Result.fail("500", "更新失败！");
         }
     }
 

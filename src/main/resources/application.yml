@@ -3,9 +3,3 @@ server:
 spring:
   profiles:
     include: sa,db
-  jpa:
-    hibernate:
-      ddl-auto: update
-logging:
-  level:
-    org.hibernate.orm.connections: off

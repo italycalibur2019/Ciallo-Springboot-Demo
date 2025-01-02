@@ -2,6 +2,9 @@ package com.italycalibur.ciallo.config.db;
 
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
+import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +15,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,6 +31,10 @@ import java.util.Map;
         transactionManagerRef = "sysTransactionManager"
 )
 public class SysConfig {
+    @Resource
+    private JpaProperties jpaProperties;
+    @Resource
+    private HibernateProperties hibernateProperties;
     @Resource(name = "sysDataSource")
     private DataSource sysDataSource;
 
@@ -39,16 +45,17 @@ public class SysConfig {
 
     @Bean(name = "sysEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean sysEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        Map<String, String> map = new HashMap<>();
-        map.put("hibernate.hbm2ddl.auto", "none");
-        map.put("hibernate.show_sql", "true");
-
         return builder
                 .dataSource(sysDataSource)
-                .properties(map)
+                .properties(jpaProperties.getProperties())
+                .properties(getVendorProperties())
                 .packages("com.italycalibur.ciallo.domain.sys")
                 .persistenceUnit("sysPersistenceUnit")
                 .build();
+    }
+
+    private Map<String, Object> getVendorProperties() {
+        return hibernateProperties.determineHibernateProperties(jpaProperties.getProperties(), new HibernateSettings());
     }
 
     @Bean(name = "sysTransactionManager")

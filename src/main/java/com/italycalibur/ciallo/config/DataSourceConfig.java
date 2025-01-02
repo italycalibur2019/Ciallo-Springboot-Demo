@@ -1,7 +1,8 @@
 package com.italycalibur.ciallo.config;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -15,17 +16,22 @@ import javax.sql.DataSource;
  * @version 1.0
  */
 @Configuration
+@Slf4j
 public class DataSourceConfig {
-    @Bean(name = "sysDataSource")
-    @ConfigurationProperties(prefix = "app.datasource.sys")
-    public DataSource sysDataSource() {
-        return DataSourceBuilder.create().build();
-    }
 
     @Primary
-    @Bean(name = "baseDataSource")
-    @ConfigurationProperties(prefix = "app.datasource.basedata")
+    @Bean(value = "baseDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.basedata")
     public DataSource baseDataSource() {
-        return DataSourceBuilder.create().build();
+        log.info("Init baseDataSource");
+        return DruidDataSourceBuilder.create().build();
     }
+
+    @Bean(name = "sysDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.sys")
+    public DataSource sysDataSource() {
+        log.info("Init sysDataSource");
+        return DruidDataSourceBuilder.create().build();
+    }
+
 }
